@@ -48,6 +48,16 @@ describe('03_separation-of-concerns-demo routes', () => {
     
   });
 
+  it('updates an order by id', async () => {
+    const order = await Order.insert({ quantity: 10 });
+
+    const res = await request(app)
+      .put(`/api/v1/orders/${order.id}`)
+      .send({ quantity: 20 });
+
+      expect(res.body).toEqual({...order, quantity: 20});
+  })
+
   //it('')
 
 
