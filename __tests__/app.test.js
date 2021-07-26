@@ -29,16 +29,6 @@ describe('03_separation-of-concerns-demo routes', () => {
       });
   });
 
-  // it('gets an order by id', async () => {
-  //   const order = await Order.insert({ quantity: 10 });
-
-  //   return request(app)
-  //     .get(`/api/v1/orders/${order.id}`)
-  //     .then((res) => {
-  //       expect(res.body).toEqual(order);
-  //     });
-  // });
-
   it('gets all the orders', async () => {
     const order = await Order.insert({ quantity: 10 });
 
@@ -48,6 +38,17 @@ describe('03_separation-of-concerns-demo routes', () => {
         expect(res.body).toEqual([order]);
       });
   });
+
+  it('gets an order by id', async () => {
+    const order = await Order.insert({ quantity: 10 });
+
+    const res = await request(app).get(`/api/v1/orders/${order.id}`);
+
+    expect(res.body).toEqual(order);
+    
+  });
+
+  //it('')
 
 
 
