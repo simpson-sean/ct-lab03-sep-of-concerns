@@ -60,13 +60,13 @@ describe('03_separation-of-concerns-demo routes', () => {
 
   it('deletes an order by id', async () => {
     const order = await Order.insert({ quantity: 10 });
+    
+    await request(app).delete(`/api/v1/orders/${order.id}`);
+    const getAll = await request(app).get(`/api/v1/orders`);      
 
-    const res = await request(app)
-      .delete(`/api/v1/orders/${order.id}`);
+    //console.log(getAll.body);
 
-      expect(res.body).toEqual({
-        message: `${order.quantity} items have been removed.`
-      });
+      expect(getAll.body).toEqual([]);
   });
 
 
